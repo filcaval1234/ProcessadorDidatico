@@ -1,102 +1,84 @@
+module processor #(int dataWidth = 9)(input logic[dataWidth-1:0] DataAndInstructionInput, input logic resetn, clock, Run, output logic Done, output logic[dataWidth-1:0] BusWires, input logic[2:0] selectionMuxInput, writeInRegister, input logic[dataWidth-1:0] a,b);
 //module processor(input logic [2:0] w, input logic Em, output logic[0:7] Y);
-module processor(input logic[2:0] state, output logic[8:0]);
- /*parameter T0 = 2’b00, T1 = 2’b01, T2 = 2’b10, T3 = 2’b11;
- assign I = IR[1:3];
- dec3to8 decX (IR[4:6], 1’b1, Xreg);
- dec3to8 decY (IR[7:9], 1’b1, Yreg);
- 
-
- // Controle de estados do FSM
- always @(Tstep_Q, Run, Done)
- begin
- case (Tstep_Q)
- T0: // Os dados são carregados no IR nesse passo
- if (!Run) Tstep_D = T0;
- else Tstep_D = T1;
- T1: . . .
- endcase
- end
-
-
- // Controle das saídas da FSM
- always @(Tstep_Q or I or Xreg or Yreg)
- begin
- . . . especifique os valores iniciais
- case (Tstep_Q)
- T0: // Armazene DIN no registrador IR no passo 0
- begin
- IRin = 1’b1;
- end
-
- T1: // Defina os sinais do passo 1
- case (I)
- . . .
- endcase
-
- T2: // Defina os sinais do passo 2
- case (I)
- . . .
- endcase
-
- T3: // Defina os sinais do passo 3
- case (I)
- . . .
- endcase
- endcase
- end
-
- // Controle os flip-flops do FSM
- always @(posedge Clock, negedge Resetn)
- if (!Resetn)
- . . .
- regn reg_0 (BusWires, Rin[0], Clock, R0);
- . . . Instancie outros registradores e o somador/subtrator
- . . . definição do barramento*/
-
- always_comb begin
-	Y = decoder3To8(w,Em);
- end
+//module processor(input logic[2:0] state, output logic[8:0] testParam);
+	logic[7:0][dataWidth-1:0] muxInput;
+	logic[0:7] selectRegister;
+	logic[dataWidth-1:0] resultUla;
+	
+	//variaveis temporarias
+	logic emableWriteInBus = '1;
+	
+	always_comb begin
+		resultUla = ula(.wordA(a), .wordB(b), .selectFunctionUla(mov));
+	end
+	
+	always_comb begin
+		selectRegister = decoder3To8(.writeInRegister(writeInRegister),.enableDecoder(1'b0));
+	end
+	
+	registerFactoryWithTriState #(dataWidth) ulaResultRegister(.date(resultUla), .registerEnable(emableWriteInBus), .clock(clock), .dataOut(BusWires));
+	
+	registerFactory #(dataWidth) reg1 (.date(DataAndInstructionInput), .registerEnable(selectRegister[0]), .clock(clock), .dataOut(muxInput[0]));
+	registerFactory #(dataWidth) reg2 (.date(DataAndInstructionInput), .registerEnable(selectRegister[1]), .clock(clock), .dataOut(muxInput[1]));
+	registerFactory #(dataWidth) reg3 (.date(DataAndInstructionInput), .registerEnable(selectRegister[2]), .clock(clock), .dataOut(muxInput[2]));
+	registerFactory #(dataWidth) reg4 (.date(DataAndInstructionInput), .registerEnable(selectRegister[3]), .clock(clock), .dataOut(muxInput[3]));
+	registerFactory #(dataWidth) reg5 (.date(DataAndInstructionInput), .registerEnable(selectRegister[4]), .clock(clock), .dataOut(muxInput[4]));
+	registerFactory #(dataWidth) reg6 (.date(DataAndInstructionInput), .registerEnable(selectRegister[5]), .clock(clock), .dataOut(muxInput[5]));
+	registerFactory #(dataWidth) reg7 (.date(DataAndInstructionInput), .registerEnable(selectRegister[6]), .clock(clock), .dataOut(muxInput[6]));
+	registerFactory #(dataWidth) reg8 (.date(DataAndInstructionInput), .registerEnable(selectRegister[7]), .clock(clock), .dataOut(muxInput[7]));
+	
+	always_ff @(posedge clock) begin
+			BusWires <= mux8To1(.inputsMux(muxInput), .selectionMuxInput(selectionMuxInput), .enableMuxOutput(!emableWriteInBus));
+	end
+	
 endmodule
+parameter dataWidth = 9;
+enum logic[2:0] {mov,movi, add, sub} upCode;
 
-function automatic logic[0:7] decoder3To8(input logic [2:0] W, input logic En);
-	logic[0:7] Y;
-	 if (En == 1)
-		 unique case (W)
-			 3'b000: Y = 8'b10000000;
-			 3'b001: Y = 8'b01000000;
-			 3'b010: Y = 8'b00100000;
-			 3'b011: Y = 8'b00010000;
-			 3'b100: Y = 8'b00001000;
-			 3'b101: Y = 8'b00000100;
-			 3'b110: Y = 8'b00000010;
-			 3'b111: Y = 8'b00000001;
+function automatic logic[0:7] decoder3To8(logic [2:0] writeInRegister, logic enableDecoder);
+	logic[0:7] outDecoder;
+	 if (enableDecoder == 1)
+		 unique case (writeInRegister)
+			 3'b000: outDecoder = 8'b10000000;
+			 3'b001: outDecoder = 8'b01000000;
+			 3'b010: outDecoder = 8'b00100000;
+			 3'b011: outDecoder = 8'b00010000;
+			 3'b100: outDecoder = 8'b00001000;
+			 3'b101: outDecoder = 8'b00000100;
+			 3'b110: outDecoder = 8'b00000010;
+			 3'b111: outDecoder = 8'b00000001;
 		 endcase
 	 else
-		Y = 8'b00000000;
-	return Y;
+		outDecoder = '0;
+	return outDecoder;
 endfunction: decoder3To8
 
+function automatic logic[dataWidth-1:0] mux8To1(logic[7:0][dataWidth-1:0] inputsMux, logic[2:0] selectionMuxInput, logic enableMuxOutput);
+	enum logic [2:0] {inputA, inputB, inputC,inputD,inputE,inputF,inputG,inputH} inputMux;
+	logic[dataWidth-1:0] outMux;
+	if(enableMuxOutput)
+		unique case(selectionMuxInput)
+			inputA: outMux = inputsMux[0];
+			inputB: outMux = inputsMux[1];
+			inputC: outMux = inputsMux[2];
+			inputD: outMux = inputsMux[3];
+			inputE: outMux = inputsMux[4];
+			inputF: outMux = inputsMux[5];
+			inputG: outMux = inputsMux[6];
+			inputH: outMux = inputsMux[7];
+		endcase
+	else
+		outMux = 'z;
+	return outMux;
+endfunction:mux8To1
 
-function automatic void finiteStateMachine(input logic[2:0] state);
-	enum logic[2:0] {mov, movi,add, sub} upCode;
-	logic [9:0] testParam;
-	unique case(state)
-		add: testParam = 0;
-		sub: testParam = 0;
-		mov: testParam = 0;
-		movi: testParam = 0;
-		default: testParam = 0;
+function automatic logic[dataWidth-1:0] ula (logic[dataWidth-1:0] wordA, wordB, logic[2:0] selectFunctionUla);
+	logic[dataWidth-1:0] outUla;
+	unique case(selectFunctionUla)
+		mov: outUla = wordB;
+		movi: outUla = wordA + wordB;
+		add: outUla = wordA + wordB;
+		sub: outUla = wordA - wordB;
 	endcase
-endfunction:finiteStateMachine
-
-/*module regn(R, Rin, Clock, Q);
- parameter n = 9;
- input [n-1:0] R;
- input Rin, Clock;
- output [n-1:0] Q;
- reg [n-1:0] Q;
- 
- always @(posedge Clock)
- if (Rin)
- Q <= R;
-endmodule*/
+	return outUla;
+endfunction:ula
