@@ -1,0 +1,10 @@
+
+State Machine - |processor|controlUnit:controlUnit_h|actualState
+Name actualState.mov actualState.sub2 actualState.add2 actualState.sub actualState.add actualState.movi actualState.initialState 
+actualState.initialState 0 0 0 0 0 0 0 
+actualState.movi 0 0 0 0 0 1 1 
+actualState.add 0 0 0 0 1 0 1 
+actualState.sub 0 0 0 1 0 0 1 
+actualState.add2 0 0 1 0 0 0 1 
+actualState.sub2 0 1 0 0 0 0 1 
+actualState.mov 1 0 0 0 0 0 1 

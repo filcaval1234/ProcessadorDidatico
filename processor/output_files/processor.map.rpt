@@ -1,0 +1,441 @@
+Analysis & Synthesis report for processor
+Tue Jun 26 15:03:37 2018
+Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Standard Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. State Machine - |processor|controlUnit:controlUnit_h|actualState
+  6. User-Specified and Inferred Latches
+  7. Multiplexer Restructuring Statistics (Restructuring Performed)
+  8. Parameter Settings for User Entity Instance: Top-level Entity: |processor
+  9. Parameter Settings for User Entity Instance: controlUnit:controlUnit_h
+ 10. Parameter Settings for User Entity Instance: registerFactoryWithTriState:ulaResultRegister
+ 11. Parameter Settings for User Entity Instance: registerFactory:registerOfValueA
+ 12. Parameter Settings for User Entity Instance: registerFactory:reg1
+ 13. Parameter Settings for User Entity Instance: registerFactory:reg2
+ 14. Parameter Settings for User Entity Instance: registerFactory:reg3
+ 15. Parameter Settings for User Entity Instance: registerFactory:reg4
+ 16. Parameter Settings for User Entity Instance: registerFactory:reg5
+ 17. Parameter Settings for User Entity Instance: registerFactory:reg6
+ 18. Parameter Settings for User Entity Instance: registerFactory:reg7
+ 19. Parameter Settings for User Entity Instance: registerFactory:reg8
+ 20. Port Connectivity Checks: "registerFactory:registerOfValueA"
+ 21. Port Connectivity Checks: "controlUnit:controlUnit_h"
+ 22. Elapsed Time Per Partition
+ 23. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2017  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+
+
+
++-------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                  ;
++-----------------------------+-------------------------------------------------+
+; Analysis & Synthesis Status ; Failed - Tue Jun 26 15:03:37 2018               ;
+; Quartus Prime Version       ; 17.1.0 Build 590 10/25/2017 SJ Standard Edition ;
+; Revision Name               ; processor                                       ;
+; Top-level Entity Name       ; processor                                       ;
+; Family                      ; Cyclone V                                       ;
+; Logic utilization (in ALMs) ; N/A until Partition Merge                       ;
+; Total registers             ; N/A until Partition Merge                       ;
+; Total pins                  ; N/A until Partition Merge                       ;
+; Total virtual pins          ; N/A until Partition Merge                       ;
+; Total block memory bits     ; N/A until Partition Merge                       ;
+; Total PLLs                  ; N/A until Partition Merge                       ;
+; Total DLLs                  ; N/A until Partition Merge                       ;
++-----------------------------+-------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                             ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                          ; Setting            ; Default Value      ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                          ; 5CSEMA5F31C6       ;                    ;
+; Top-level entity name                                                           ; processor          ; processor          ;
+; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
+; Use smart compilation                                                           ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation      ; On                 ; On                 ;
+; Enable compact report table                                                     ; Off                ; Off                ;
+; Restructure Multiplexers                                                        ; Auto               ; Auto               ;
+; MLAB Add Timing Constraints For Mixed-Port Feed-Through Mode Setting Don't Care ; Off                ; Off                ;
+; Create Debugging Nodes for IP Cores                                             ; Off                ; Off                ;
+; Preserve fewer node names                                                       ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                                   ; Enable             ; Enable             ;
+; Verilog Version                                                                 ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                                    ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                        ; Auto               ; Auto               ;
+; Safe State Machine                                                              ; Off                ; Off                ;
+; Extract Verilog State Machines                                                  ; On                 ; On                 ;
+; Extract VHDL State Machines                                                     ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                               ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                      ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                                  ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                         ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                       ; On                 ; On                 ;
+; Parallel Synthesis                                                              ; On                 ; On                 ;
+; DSP Block Balancing                                                             ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                              ; On                 ; On                 ;
+; Power-Up Don't Care                                                             ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                                    ; Off                ; Off                ;
+; Remove Duplicate Registers                                                      ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                            ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                          ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                           ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                       ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                            ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                             ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                                  ; Off                ; Off                ;
+; Optimization Technique                                                          ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                              ; 70                 ; 70                 ;
+; Auto Carry Chains                                                               ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                            ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                           ; Off                ; Off                ;
+; Auto ROM Replacement                                                            ; On                 ; On                 ;
+; Auto RAM Replacement                                                            ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                      ; On                 ; On                 ;
+; Auto Shift Register Replacement                                                 ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                                 ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                                   ; On                 ; On                 ;
+; Strict RAM Replacement                                                          ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                               ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                           ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                              ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                              ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                                   ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                             ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                               ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                         ; On                 ; On                 ;
+; Report Parameter Settings                                                       ; On                 ; On                 ;
+; Report Source Assignments                                                       ; On                 ; On                 ;
+; Report Connectivity Checks                                                      ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                              ; Off                ; Off                ;
+; Synchronization Register Chain Length                                           ; 3                  ; 3                  ;
+; Power Optimization During Synthesis                                             ; Normal compilation ; Normal compilation ;
+; HDL message level                                                               ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                                 ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                        ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                              ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                       ; 100                ; 100                ;
+; Clock MUX Protection                                                            ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                     ; Off                ; Off                ;
+; Block Design Naming                                                             ; Auto               ; Auto               ;
+; SDC constraint protection                                                       ; Off                ; Off                ;
+; Synthesis Effort                                                                ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal                    ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                            ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                              ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                     ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                          ; On                 ; On                 ;
+; Automatic Parallel Synthesis                                                    ; On                 ; On                 ;
+; Partial Reconfiguration Bitstream ID                                            ; Off                ; Off                ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 8           ;
+; Maximum allowed            ; 4           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
++----------------------------+-------------+
+
+
+Encoding Type:  One-Hot
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |processor|controlUnit:controlUnit_h|actualState                                                                                                   ;
++--------------------------+-----------------+------------------+------------------+-----------------+-----------------+------------------+--------------------------+
+; Name                     ; actualState.mov ; actualState.sub2 ; actualState.add2 ; actualState.sub ; actualState.add ; actualState.movi ; actualState.initialState ;
++--------------------------+-----------------+------------------+------------------+-----------------+-----------------+------------------+--------------------------+
+; actualState.initialState ; 0               ; 0                ; 0                ; 0               ; 0               ; 0                ; 0                        ;
+; actualState.movi         ; 0               ; 0                ; 0                ; 0               ; 0               ; 1                ; 1                        ;
+; actualState.add          ; 0               ; 0                ; 0                ; 0               ; 1               ; 0                ; 1                        ;
+; actualState.sub          ; 0               ; 0                ; 0                ; 1               ; 0               ; 0                ; 1                        ;
+; actualState.add2         ; 0               ; 0                ; 1                ; 0               ; 0               ; 0                ; 1                        ;
+; actualState.sub2         ; 0               ; 1                ; 0                ; 0               ; 0               ; 0                ; 1                        ;
+; actualState.mov          ; 1               ; 0                ; 0                ; 0               ; 0               ; 0                ; 1                        ;
++--------------------------+-----------------+------------------+------------------+-----------------+-----------------+------------------+--------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                                                              ;
++----------------------------------------------------+----------------------------------------------------+------------------------+
+; Latch Name                                         ; Latch Enable Signal                                ; Free of Timing Hazards ;
++----------------------------------------------------+----------------------------------------------------+------------------------+
+; mux8To1.outMux_0__57                               ; controlUnit:controlUnit_h|actualState.initialState ; yes                    ;
+; mux8To1.outMux_1__63                               ; controlUnit:controlUnit_h|actualState.initialState ; yes                    ;
+; mux8To1.outMux_2__69                               ; controlUnit:controlUnit_h|actualState.initialState ; yes                    ;
+; mux8To1.outMux_3__75                               ; controlUnit:controlUnit_h|actualState.initialState ; yes                    ;
+; mux8To1.outMux_4__81                               ; controlUnit:controlUnit_h|actualState.initialState ; yes                    ;
+; mux8To1.outMux_5__87                               ; controlUnit:controlUnit_h|actualState.initialState ; yes                    ;
+; mux8To1.outMux_6__93                               ; controlUnit:controlUnit_h|actualState.initialState ; yes                    ;
+; mux8To1.outMux_7__99                               ; controlUnit:controlUnit_h|actualState.initialState ; yes                    ;
+; mux8To1.outMux_8__105                              ; controlUnit:controlUnit_h|actualState.initialState ; yes                    ;
+; Number of user-specified and inferred latches = 9  ;                                                    ;                        ;
++----------------------------------------------------+----------------------------------------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; 8:1                ; 9 bits    ; 45 LEs        ; 45 LEs               ; 0 LEs                  ; No         ; |processor|Mux8            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+
+
++---------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |processor ;
++----------------+-------+--------------------------------------------------+
+; Parameter Name ; Value ; Type                                             ;
++----------------+-------+--------------------------------------------------+
+; dataWidth      ; 9     ; Signed Integer                                   ;
++----------------+-------+--------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: controlUnit:controlUnit_h ;
++----------------------+-------+-----------------------------------------+
+; Parameter Name       ; Value ; Type                                    ;
++----------------------+-------+-----------------------------------------+
+; lenUpCode            ; 3     ; Signed Integer                          ;
+; amountRegister       ; 8     ; Signed Integer                          ;
+; widthAddressRegister ; 3     ; Signed Integer                          ;
++----------------------+-------+-----------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: registerFactoryWithTriState:ulaResultRegister ;
++----------------+-------+-------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                              ;
++----------------+-------+-------------------------------------------------------------------+
+; dataWidth      ; 9     ; Signed Integer                                                    ;
++----------------+-------+-------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: registerFactory:registerOfValueA ;
++----------------+-------+------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                 ;
++----------------+-------+------------------------------------------------------+
+; dataWidth      ; 9     ; Signed Integer                                       ;
++----------------+-------+------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: registerFactory:reg1 ;
++----------------+-------+------------------------------------------+
+; Parameter Name ; Value ; Type                                     ;
++----------------+-------+------------------------------------------+
+; dataWidth      ; 9     ; Signed Integer                           ;
++----------------+-------+------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: registerFactory:reg2 ;
++----------------+-------+------------------------------------------+
+; Parameter Name ; Value ; Type                                     ;
++----------------+-------+------------------------------------------+
+; dataWidth      ; 9     ; Signed Integer                           ;
++----------------+-------+------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: registerFactory:reg3 ;
++----------------+-------+------------------------------------------+
+; Parameter Name ; Value ; Type                                     ;
++----------------+-------+------------------------------------------+
+; dataWidth      ; 9     ; Signed Integer                           ;
++----------------+-------+------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: registerFactory:reg4 ;
++----------------+-------+------------------------------------------+
+; Parameter Name ; Value ; Type                                     ;
++----------------+-------+------------------------------------------+
+; dataWidth      ; 9     ; Signed Integer                           ;
++----------------+-------+------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: registerFactory:reg5 ;
++----------------+-------+------------------------------------------+
+; Parameter Name ; Value ; Type                                     ;
++----------------+-------+------------------------------------------+
+; dataWidth      ; 9     ; Signed Integer                           ;
++----------------+-------+------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: registerFactory:reg6 ;
++----------------+-------+------------------------------------------+
+; Parameter Name ; Value ; Type                                     ;
++----------------+-------+------------------------------------------+
+; dataWidth      ; 9     ; Signed Integer                           ;
++----------------+-------+------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: registerFactory:reg7 ;
++----------------+-------+------------------------------------------+
+; Parameter Name ; Value ; Type                                     ;
++----------------+-------+------------------------------------------+
+; dataWidth      ; 9     ; Signed Integer                           ;
++----------------+-------+------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: registerFactory:reg8 ;
++----------------+-------+------------------------------------------+
+; Parameter Name ; Value ; Type                                     ;
++----------------+-------+------------------------------------------+
+; dataWidth      ; 9     ; Signed Integer                           ;
++----------------+-------+------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "registerFactory:registerOfValueA"                                                      ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+; Port    ; Type   ; Severity ; Details                                                                             ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+; dataOut ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "controlUnit:controlUnit_h"                                                                                             ;
++--------------------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port               ; Type   ; Severity ; Details                                                                                                  ;
++--------------------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; done               ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                      ;
+; selectRegisterRead ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++--------------------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:00     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 17.1.0 Build 590 10/25/2017 SJ Standard Edition
+    Info: Processing started: Tue Jun 26 15:03:29 2018
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off processor -c processor
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file processor.sv
+    Info (12023): Found entity 1: processor File: /home/assert/processor/processor.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file registerFactory.sv
+    Info (12023): Found entity 1: registerFactory File: /home/assert/processor/registerFactory.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file registerFactoryWithTriState.sv
+    Info (12023): Found entity 1: registerFactoryWithTriState File: /home/assert/processor/registerFactoryWithTriState.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file controlUnit.sv
+    Info (12023): Found entity 1: controlUnit File: /home/assert/processor/controlUnit.sv Line: 1
+Warning (10236): Verilog HDL Implicit Net warning at processor.sv(15): created implicit net for "done" File: /home/assert/processor/processor.sv Line: 15
+Info (12127): Elaborating entity "processor" for the top level hierarchy
+Warning (10036): Verilog HDL or VHDL warning at processor.sv(19): object "emableWriteInBus" assigned a value but never read File: /home/assert/processor/processor.sv Line: 19
+Warning (10242): Verilog HDL Function Declaration warning at processor.sv(62): variable "outMux" may have a Don't Care value because it may not be assigned a value in every possible path through the statements preceding its use File: /home/assert/processor/processor.sv Line: 62
+Warning (10034): Output port "Done" at processor.sv(1) has no driver File: /home/assert/processor/processor.sv Line: 1
+Info (10041): Inferred latch for "mux8To1.outMux_0_" at processor.sv(51) File: /home/assert/processor/processor.sv Line: 51
+Info (10041): Inferred latch for "mux8To1.outMux_1_" at processor.sv(51) File: /home/assert/processor/processor.sv Line: 51
+Info (10041): Inferred latch for "mux8To1.outMux_2_" at processor.sv(51) File: /home/assert/processor/processor.sv Line: 51
+Info (10041): Inferred latch for "mux8To1.outMux_3_" at processor.sv(51) File: /home/assert/processor/processor.sv Line: 51
+Info (10041): Inferred latch for "mux8To1.outMux_4_" at processor.sv(51) File: /home/assert/processor/processor.sv Line: 51
+Info (10041): Inferred latch for "mux8To1.outMux_5_" at processor.sv(51) File: /home/assert/processor/processor.sv Line: 51
+Info (10041): Inferred latch for "mux8To1.outMux_6_" at processor.sv(51) File: /home/assert/processor/processor.sv Line: 51
+Info (10041): Inferred latch for "mux8To1.outMux_7_" at processor.sv(51) File: /home/assert/processor/processor.sv Line: 51
+Info (10041): Inferred latch for "mux8To1.outMux_8_" at processor.sv(51) File: /home/assert/processor/processor.sv Line: 51
+Info (12128): Elaborating entity "controlUnit" for hierarchy "controlUnit:controlUnit_h" File: /home/assert/processor/processor.sv Line: 16
+Warning (10034): Output port "selectRegisterRead" at controlUnit.sv(4) has no driver File: /home/assert/processor/controlUnit.sv Line: 4
+Info (12128): Elaborating entity "registerFactoryWithTriState" for hierarchy "registerFactoryWithTriState:ulaResultRegister" File: /home/assert/processor/processor.sv Line: 27
+Info (12128): Elaborating entity "registerFactory" for hierarchy "registerFactory:registerOfValueA" File: /home/assert/processor/processor.sv Line: 29
+Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Warning (13034): The following nodes have both tri-state and non-tri-state drivers
+    Warning (13035): Inserted always-enabled tri-state buffer between "BusWires[0]" and its non-tri-state driver. File: /home/assert/processor/processor.sv Line: 1
+    Warning (13035): Inserted always-enabled tri-state buffer between "BusWires[1]" and its non-tri-state driver. File: /home/assert/processor/processor.sv Line: 1
+    Warning (13035): Inserted always-enabled tri-state buffer between "BusWires[2]" and its non-tri-state driver. File: /home/assert/processor/processor.sv Line: 1
+    Warning (13035): Inserted always-enabled tri-state buffer between "BusWires[3]" and its non-tri-state driver. File: /home/assert/processor/processor.sv Line: 1
+    Warning (13035): Inserted always-enabled tri-state buffer between "BusWires[4]" and its non-tri-state driver. File: /home/assert/processor/processor.sv Line: 1
+    Warning (13035): Inserted always-enabled tri-state buffer between "BusWires[5]" and its non-tri-state driver. File: /home/assert/processor/processor.sv Line: 1
+    Warning (13035): Inserted always-enabled tri-state buffer between "BusWires[6]" and its non-tri-state driver. File: /home/assert/processor/processor.sv Line: 1
+    Warning (13035): Inserted always-enabled tri-state buffer between "BusWires[7]" and its non-tri-state driver. File: /home/assert/processor/processor.sv Line: 1
+    Warning (13035): Inserted always-enabled tri-state buffer between "BusWires[8]" and its non-tri-state driver. File: /home/assert/processor/processor.sv Line: 1
+Warning (13039): The following bidirectional pins have no drivers
+    Warning (13040): bidirectional pin "global.bp.work.work.mux8To1.outMux_8_" has no driver
+    Warning (13040): bidirectional pin "global.bp.work.work.mux8To1.outMux_7_" has no driver
+    Warning (13040): bidirectional pin "global.bp.work.work.mux8To1.outMux_6_" has no driver
+    Warning (13040): bidirectional pin "global.bp.work.work.mux8To1.outMux_5_" has no driver
+    Warning (13040): bidirectional pin "global.bp.work.work.mux8To1.outMux_4_" has no driver
+    Warning (13040): bidirectional pin "global.bp.work.work.mux8To1.outMux_3_" has no driver
+    Warning (13040): bidirectional pin "global.bp.work.work.mux8To1.outMux_2_" has no driver
+    Warning (13040): bidirectional pin "global.bp.work.work.mux8To1.outMux_1_" has no driver
+    Warning (13040): bidirectional pin "global.bp.work.work.mux8To1.outMux_0_" has no driver
+Error (13076): The pin "BusWires[0]" has multiple drivers due to the non-tri-state driver "mux8To1.outMux_0__57" File: /home/assert/processor/processor.sv Line: 1
+Error (13076): The pin "BusWires[1]" has multiple drivers due to the non-tri-state driver "mux8To1.outMux_1__63" File: /home/assert/processor/processor.sv Line: 1
+Error (13076): The pin "BusWires[2]" has multiple drivers due to the non-tri-state driver "mux8To1.outMux_2__69" File: /home/assert/processor/processor.sv Line: 1
+Error (13076): The pin "BusWires[3]" has multiple drivers due to the non-tri-state driver "mux8To1.outMux_3__75" File: /home/assert/processor/processor.sv Line: 1
+Error (13076): The pin "BusWires[4]" has multiple drivers due to the non-tri-state driver "mux8To1.outMux_4__81" File: /home/assert/processor/processor.sv Line: 1
+Error (13076): The pin "BusWires[5]" has multiple drivers due to the non-tri-state driver "mux8To1.outMux_5__87" File: /home/assert/processor/processor.sv Line: 1
+Error (13076): The pin "BusWires[6]" has multiple drivers due to the non-tri-state driver "mux8To1.outMux_6__93" File: /home/assert/processor/processor.sv Line: 1
+Error (13076): The pin "BusWires[7]" has multiple drivers due to the non-tri-state driver "mux8To1.outMux_7__99" File: /home/assert/processor/processor.sv Line: 1
+Error (13076): The pin "BusWires[8]" has multiple drivers due to the non-tri-state driver "mux8To1.outMux_8__105" File: /home/assert/processor/processor.sv Line: 1
+Error: Quartus Prime Analysis & Synthesis was unsuccessful. 9 errors, 27 warnings
+    Error: Peak virtual memory: 951 megabytes
+    Error: Processing ended: Tue Jun 26 15:03:37 2018
+    Error: Elapsed time: 00:00:08
+    Error: Total CPU time (on all processors): 00:00:20
+
+
